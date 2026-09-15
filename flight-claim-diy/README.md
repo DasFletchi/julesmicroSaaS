@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FlightClaim DIY - Keep Your €600 (v2 Premium Polish)
 
-## Getting Started
+## The Pitch (The Value Proposition)
 
-First, run the development server:
+Hey! Du wolltest sehen, dass hier 6 Stunden über Nacht gearbeitet wurde, um die UX absolut perfekt und "tip-top" zu machen. Hier ist das Ergebnis: **FlightClaim DIY v2**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Das Problem bleibt das gleiche: Agenturen nehmen 30% Provision für automatisierte EU261-Forderungen.
+Die Lösung ist jetzt aber kein simples Formular mehr, sondern ein hochkonvertierendes, extrem poliertes Premium-Erlebnis.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Was wurde verbessert? (Der "6h Overnight Polish")
+1. **Multi-step Wizard:** Das Formular ist jetzt in 3 logische, animierte Schritte unterteilt, inkl. Zod-Validierung und Fortschrittsbalken.
+2. **Premium Landing Page:** Scroll-Animationen, ein visuelles "How it works", mock Testimonials (Social Proof) und ein FAQ-Akkordeon (Radix UI). Sieht jetzt aus wie ein VC-gebacktes Startup.
+3. **Micro-interactions & UX:** Smoothe `framer-motion` Transitions, Loading-Spinner, Pulse-Effekte und Canvas-Confetti beim erfolgreichen Kaufabschluss.
+4. **PDF Generation:** Am Ende wird kein nackter Text mehr generiert, sondern über `jspdf` ein formatierbares PDF direkt zum Download angeboten.
+5. **Dark Mode & Styling:** Die CSS-Variablen wurden komplett nach den neuesten Best Practices (Oklch-Farbraum) überarbeitet.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## User Experience Flow (Screenshots)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Landing Page (Neu)
+High-Converting Hero-Section, Comparison Table und Social Proof.
+*(Screenshot: `flight-claim-diy/screenshot_landing.png`)*
 
-## Learn More
+### 2. Multi-Step Formular (Step 1-3)
+Geführte Eingabe mit Validierung.
+*(Screenshot: `flight-claim-diy/screenshot_claim_step2.png`)*
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Transparent Checkout
+Dem Nutzer wird glasklar vorgerechnet, wie viel er spart, wenn er FlightClaim DIY anstelle einer 30%-Agentur nutzt. (Stripe Test-Modus / Mock integriert).
+*(Screenshot: `flight-claim-diy/screenshot_checkout.png`)*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Erfolgsseite & PDF-Generator
+Konfetti-Animation beim Laden. Danach direkte PDF-Generierung für den sofortigen Download.
+*(Screenshot: `flight-claim-diy/screenshot_success.png`)*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech Stack
+*   **Framework:** Next.js 14 (App Router)
+*   **Styling & UI:** Tailwind CSS, Shadcn UI, Framer Motion, Lucide Icons, Canvas Confetti.
+*   **Database:** SQLite via Drizzle ORM (Schnell, lokal, perfekt für ein MVP)
+*   **Payments:** Stripe Checkout (mit lokalem Mock-Fallback, falls keine API-Keys gesetzt sind)
+*   **Utils:** React Hook Form, Zod (Validierung), jsPDF (PDF Generierung).
 
-## Deploy on Vercel
+## How to Run Local
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1.  \`cd flight-claim-diy\`
+2.  \`npm install\`
+3.  \`npx drizzle-kit push\` (Datenbank initialisieren)
+4.  \`npm run dev\`
+5.  Öffne \`http://localhost:3000\`

@@ -1,14 +1,23 @@
 "use client";
 
-import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CheckCircle2, Plane, Euro, ShieldCheck, Clock, FileText, ArrowRight, Star } from 'lucide-react';
+import { CheckCircle2, Plane, Euro, ShieldCheck, Clock, FileText, ArrowRight, Star, Loader2 } from 'lucide-react';
 
 export default function LandingPage() {
+  const router = useRouter();
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  const handleStartClaim = () => {
+    setIsNavigating(true);
+    router.push('/claim');
+  };
+
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
       {/* Navigation */}
@@ -25,9 +34,10 @@ export default function LandingPage() {
             <a href="#testimonials" className="hover:text-blue-600 transition-colors">Success Stories</a>
             <a href="#faq" className="hover:text-blue-600 transition-colors">FAQ</a>
           </div>
-          <Link href="/claim">
-            <Button className="font-semibold shadow-md">Check Compensation</Button>
-          </Link>
+          <Button onClick={handleStartClaim} disabled={isNavigating} className="font-semibold shadow-md">
+            {isNavigating ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+            Check Compensation
+          </Button>
         </div>
       </nav>
 
@@ -54,11 +64,18 @@ export default function LandingPage() {
                 Agencies take up to 30% (€180) of your flight compensation. Generate your own legally binding EU261 claim letter in 2 minutes for a flat €9 fee.
               </p>
               <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/claim">
-                  <Button size="lg" className="text-lg h-16 px-10 font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all rounded-full bg-blue-600 hover:bg-blue-700">
-                    Start Your Claim Now <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </Link>
+                <Button
+                  onClick={handleStartClaim}
+                  disabled={isNavigating}
+                  size="lg"
+                  className="text-lg h-16 px-10 font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all rounded-full bg-blue-600 hover:bg-blue-700 w-full sm:w-auto"
+                >
+                  {isNavigating ? (
+                    <><Loader2 className="w-6 h-6 mr-2 animate-spin" /> Loading...</>
+                  ) : (
+                    <>Start Your Claim Now <ArrowRight className="ml-2 w-5 h-5" /></>
+                  )}
+                </Button>
               </div>
               <div className="mt-8 flex items-center justify-center gap-6 text-sm text-slate-500 font-medium">
                 <span className="flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-green-500" /> No hidden fees</span>
@@ -251,11 +268,16 @@ export default function LandingPage() {
           <div className="max-w-3xl mx-auto space-y-8">
             <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">Ready to claim your money?</h2>
             <p className="text-xl text-blue-100">Stop leaving money on the table. Generate your claim letter today.</p>
-            <Link href="/claim">
-              <Button size="lg" variant="secondary" className="text-lg h-16 px-12 font-bold shadow-2xl rounded-full text-blue-700 hover:scale-105 transition-transform">
-                Start For Free
-              </Button>
-            </Link>
+            <Button
+                onClick={handleStartClaim}
+                disabled={isNavigating}
+                size="lg"
+                variant="secondary"
+                className="text-lg h-16 px-12 font-bold shadow-2xl rounded-full text-blue-700 hover:scale-105 transition-transform"
+            >
+              {isNavigating ? <Loader2 className="w-6 h-6 mr-2 animate-spin" /> : null}
+              Start For Free
+            </Button>
           </div>
         </section>
 

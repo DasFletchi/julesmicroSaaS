@@ -64,7 +64,7 @@ const fs = require('fs');
     // 6. Generate letter
     await page.fill('input[id="name"]', 'Max Mustermann');
     await page.fill('input[id="address"]', 'Musterstraße 1, 10115 Berlin');
-    await page.click('button:has-text("Generate My PDF Letter")');
+    await page.click('button:has-text("Generate My Letter")');
     await page.waitForSelector('text=Dear Sir/Madam');
     await page.waitForTimeout(500);
     await page.screenshot({ path: 'screenshot_letter.png' });
